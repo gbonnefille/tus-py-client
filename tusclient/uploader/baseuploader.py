@@ -125,7 +125,6 @@ class BaseUploader:
         self.fingerprinter = fingerprinter or fingerprint.Fingerprint()
         self.offset = 0
         self.url = None
-        self.__init_url_and_offset(url)
         self.chunk_size = chunk_size
         self.verify_tls_cert = verify_tls_cert
         self.retries = retries
@@ -135,6 +134,8 @@ class BaseUploader:
         self.upload_checksum = upload_checksum
         self.__checksum_algorithm_name, self.__checksum_algorithm = \
             self.CHECKSUM_ALGORITHM_PAIR
+        # Init URL once all properties are set as it can trigger an HTTP request
+        self.__init_url_and_offset(url)
 
     def get_headers(self):
         """
