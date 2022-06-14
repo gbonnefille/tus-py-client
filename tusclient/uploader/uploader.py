@@ -21,6 +21,9 @@ def _verify_upload(request: TusRequest):
 
 
 class Uploader(BaseUploader):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
     def upload(self, stop_at: Optional[int] = None):
         """
         Perform file upload.
